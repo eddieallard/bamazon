@@ -92,7 +92,7 @@ connection.query(
       if (err) throw err;
       
       // STARTING THE PROCESS OVER AGAIN AFTER PURCHASE
-      loadProducts();
+      loadProducts(res);
     }
   );
 }
@@ -102,9 +102,6 @@ function checkInventory(choice, products) {
     products.forEach(product => {
         if (choice === product.id) {
             return product;
-        }
-        else {
-            return null;
         }
     });
 }
