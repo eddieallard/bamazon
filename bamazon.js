@@ -1,6 +1,8 @@
 // INITIALIZE DEPENDENCIES
 var mysql = require('mysql');
 var inquirer = require("inquirer");
+var total = 0;
+
 // INITIALIZE CONNECTION VARIABLE TO SYNC W/ MYSQL DATABASE
 var connection = mysql.createConnection({
     host: "localhost",
@@ -9,6 +11,7 @@ var connection = mysql.createConnection({
     password: "root",
     database: "bamazon"
 })
+
 // CREATE THE CONNECTION WITH THE SERVER AND LOAD THE PRODUCT DATA
 connection.connect(function (err) {
 
@@ -17,9 +20,10 @@ connection.connect(function (err) {
     }
     loadProducts()
 })
+
 // FUNCTION TO LOAD PRODUCTS FROM DB
 function loadProducts() {
-    connection.query("SELECT * FROM products", function (err, res) {
+    connection.query("SELECT id, product_name, department_name, price FROM products", function (err, res) {
         if (err) throw err;
 
         // DISPLAYS ITEMS IN A TABLE
@@ -29,6 +33,7 @@ function loadProducts() {
         promptCustomerForItem(res);
     })
 }
+
 // PROMPT THE CUSTOMER FOR PRODUCT ID
 function promptCustomerForItem(products) {
     inquirer
@@ -51,7 +56,7 @@ function promptCustomerForItem(products) {
 
 
 // PROMPT CUSTOMER FOR QUANTITY
-function promptCustomerForQuantity(product) {
+function promptCustomerForQuantity(product, res) {
     inquirer
         .prompt([{
             name: "Quantity",
@@ -92,3 +97,18 @@ function checkInventory(choice, products) {
     }
     return null;
 };
+// TOTAL UP THE AMOUNT PURCHASED
+
+total = res[0].price * answer.Quantity;
+var updatedQuantity = res[0].stock_quantity - answer.Quantity;
+connection.query(`UPDATE products SET stock_quantity=${updatedQuantity} WHERE id = ${answer.id}`, function (res) {
+    console.log(`Total Amount Purchased: ${res[0].total}`)
+
+});
+
+
+
+
+
+
+    
