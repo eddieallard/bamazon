@@ -14,14 +14,14 @@ The application will either:
 * Thank you for your purchase along with how much you owe or
 * Indicate that our store does not have sufficient quantity.
 
-### Screenshots:
-
 * [Link to the app](https://eddieallard.github.io/bamazon/)
 
-* [Spotify-this-song-Screenshot](ClassRepo_Local\Homework\Node - Liri App\liri-node-app\images\spotify this song.PNG)
-* [Concert-This-Screenshot](ClassRepo_Local\Homework\Node - Liri App\liri-node-app\images\concert this.PNG)
-* [Movie-This-Screenshot](ClassRepo_Local\Homework\Node - Liri App\liri-node-app\images\movie this.PNG)
+### Screenshots:
+
+* 
+* 
+* 
 
 ### Video Link:
 
-* [Video](https://drive.google.com/file/d/1UzOaQ1KEHx3l-MlhIP2IW1AK5YGKrauE/view?usp=sharing)
+* [Video](https://drive.google.com/file)

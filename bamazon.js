@@ -69,10 +69,14 @@ function promptCustomerForQuantity(product, res) {
                 console.log("Insufficient Quantity, Please choose a lesser value");
                 loadProducts();
             } else {
-                makePurchase(product, quantity);
-            }
-        })
-}
+                makePurchase(product, quantity),
+                total = res[0].price * answer.Quantity;
+                var updatedQuantity = res[0].stock_quantity - answer.Quantity;
+                connection.query(`UPDATE products SET stock_quantity=${updatedQuantity} WHERE id = ${answer.id}`, function (res) {
+                    console.log(`Total Amount Purchased: ${res[0].total}`);
+                });
+            } 
+            },
 
 // UPDATING DATABASE TO REFLECT PURCHASE
 function makePurchase(product, quantity) {
@@ -86,7 +90,7 @@ function makePurchase(product, quantity) {
             loadProducts(res);
         }
     );
-}
+},
 
 // CHECK INVENTORY TO SEE IF THE USER CHOICE EXIST IN
 function checkInventory(choice, products) {
@@ -96,19 +100,4 @@ function checkInventory(choice, products) {
         }
     }
     return null;
-};
-// TOTAL UP THE AMOUNT PURCHASED
-
-total = res[0].price * answer.Quantity;
-var updatedQuantity = res[0].stock_quantity - answer.Quantity;
-connection.query(`UPDATE products SET stock_quantity=${updatedQuantity} WHERE id = ${answer.id}`, function (res) {
-    console.log(`Total Amount Purchased: ${res[0].total}`)
-
-});
-
-
-
-
-
-
-    
+})};
